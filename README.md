@@ -89,7 +89,6 @@ HR                   EMP_DETAILS_VIEW               Y
 
 Get details about table partitions.
 ```
-system@XE SYSTEM> -- what partions and aprtition columns table has
 system@XE SYSTEM> @tpt SYSTEM LOGMNR_OBJ$
 
 OWNER                NAME                           COLUMN_NAME                             P
