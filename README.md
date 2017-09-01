@@ -1,7 +1,7 @@
 # sqlplus-commands
 Bash-like commands in sqlplus for browsing Oracle Data Dictionary.
 
-I have once no choice but to use SQL*Plus and I created a set of scrtips which
+I had once no choice but to use SQL*Plus and I created a set of scrtips which
 helped me navigate around Oracle Data Dictionary in everyday work. 
 
 ## Features
