@@ -1,12 +1,12 @@
 /*
 Author: Tomas Rohr, rohr.tomas@gmail.com
-Last change date: 2017-07-15
+Last change date: 2017-09-01
 */
 SET VERIFY OFF
 
 /*
 Do not prompt for substitution variables values.
-Use '%' as default value for substitution variable.
+Use null as default value for substitution variable.
 */
 COLUMN 1 NEW_VALUE 1
 SET FEEDBACK OFF

@@ -1,12 +1,12 @@
 /*
 Author: Tomas Rohr, rohr.tomas@gmail.com
-Last change date: 2017-07-15
+Last change date: 2017-09-01
 */
 SET VERIFY OFF
 
 /*
 Do not prompt for substitution variables values.
-Use '%' as default value for substitution variable.
+Use null as default value for substitution variable.
 */
 COLUMN 1 NEW_VALUE 1
 COLUMN 2 NEW_VALUE 2
@@ -14,8 +14,7 @@ SET FEEDBACK OFF
 SELECT NULL "1", NULL "2" FROM DUAL WHERE 1=0;
 SET FEEDBACK ON
 
-COLUMN OWNER FORMAT A20
-COLUMN CONSTRAINT_NAME FORMAT A20
+COLUMN CONSTRAINT_NAME FORMAT A30
 COLUMN COLUMN_NAME FORMAT A30
 COLUMN STATUS FORMAT A10
 
