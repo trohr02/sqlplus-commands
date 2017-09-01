@@ -103,8 +103,6 @@ PARTITION_NAME                 HIGH_VALUE                                       
 P_LESSTHAN100                  100                                                          0 29.05.14
 
 1 row selected.
-
-system@XE HR>
 ```
 
 Customized login script which sets various sqlplus parameters to reasonable values, 
