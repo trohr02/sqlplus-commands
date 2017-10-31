@@ -140,6 +140,33 @@ HR                   JOB_HISTORY                                   0,1          
 HR                   JOBS                                          0,1                8 TABLE
 HR                   LOCATIONS                                     0,1                8 TABLE
 HR                   REGIONS                                       0,1                8 TABLE
+=======
+
+List views 
+```
+system@XE HR> @lsv
+
+OWNER                VIEW_NAME                      READ_ONLY
+-------------------- ------------------------------ ---------
+HR                   EMP_DETAILS_VIEW               Y
+```
+
+Get details about table partitions.
+```
+system@XE SYSTEM> @tpt SYSTEM LOGMNR_OBJ$
+
+OWNER                NAME                           COLUMN_NAME                             P
+-------------------- ------------------------------ ------------------------------ ----------
+SYSTEM               LOGMNR_OBJ$                    LOGMNR_UID                              1
+
+1 row selected.
+
+
+PARTITION_NAME                 HIGH_VALUE                                            NUM_ROWS LAST_ANA
+------------------------------ -------------------------------------------------- ----------- --------
+P_LESSTHAN100                  100                                                          0 29.05.14
+
+1 row selected.
 ```
 
 Customized login script which sets various sqlplus parameters to reasonable values, 
