@@ -9,6 +9,8 @@ See the documentation on the [wiki](https://github.com/trohr02/sqlplus-commands/
 ## Features
 
 - List tables, views, triggers, packages, user, etc. 
+- Show table size, table statistics
+- Compare tables in terms of their columns, data types, keys, etc.
 - Unix-like prompt which shows user and database instance that you are logged on to and also the current schema.
 - Customized login script
 
@@ -77,6 +79,68 @@ SYSTEM
 system@XE SYSTEM> @owner HR
 system@XE HR>
 ```
+
+List views 
+```
+system@XE HR> @lsv
+
+OWNER                VIEW_NAME                      READ_ONLY
+-------------------- ------------------------------ ---------
+HR                   EMP_DETAILS_VIEW               Y
+```
+
+Get details about table partitions.
+```
+system@XE SYSTEM> @tpt SYSTEM LOGMNR_OBJ$
+
+OWNER                NAME                           COLUMN_NAME                             P
+-------------------- ------------------------------ ------------------------------ ----------
+SYSTEM               LOGMNR_OBJ$                    LOGMNR_UID                              1
+
+1 row selected.
+
+
+PARTITION_NAME                 HIGH_VALUE                                            NUM_ROWS LAST_ANA
+------------------------------ -------------------------------------------------- ----------- --------
+P_LESSTHAN100                  100                                                          0 29.05.14
+
+1 row selected.
+```
+
+Compare table definitions
+```
+sys@XE SYS> @tdiff HR EMPLOYEES HR JOB_HISTORY
+
+FLAG   PK A_COLUMN                       A_DATATYPE           N V  PK B_COLUMN                       B_DATATYPE           N V
+----- --- ------------------------------ -------------------- - - --- ------------------------------ -------------------- - -
+        1 EMPLOYEE_ID                    NUMBER(6,0)          N N   1 EMPLOYEE_ID                    NUMBER(6,0)          N N
+<         FIRST_NAME                     VARCHAR2(20 BYTE)    Y N
+<         LAST_NAME                      VARCHAR2(25 BYTE)    N N
+<         EMAIL                          VARCHAR2(25 BYTE)    N N
+<         PHONE_NUMBER                   VARCHAR2(20 BYTE)    Y N
+<         HIRE_DATE                      DATE                 N N
+          JOB_ID                         VARCHAR2(10 BYTE)    N N     JOB_ID                         VARCHAR2(10 BYTE)    N N
+<         SALARY                         NUMBER(8,2)          Y N
+<         COMMISSION_PCT                 NUMBER(2,2)          Y N
+<         MANAGER_ID                     NUMBER(6,0)          Y N
+          DEPARTMENT_ID                  NUMBER(4,0)          Y N     DEPARTMENT_ID                  NUMBER(4,0)          Y N
+>P                                                                  2 START_DATE                     DATE                 N N
+>                                                                     END_DATE                       DATE                 N N
+```
+
+View table sizes
+```
+sys@XE SYS> @tsize HR %
+
+OWNER                TABLE_NAME                                     MB           BLOCKS SEGMENT_TYPE
+-------------------- ------------------------------ ------------------ ---------------- --------------------
+HR                   DEPARTMENTS                                   0,1                8 TABLE
+HR                   EMPLOYEES                                     0,1                8 TABLE
+HR                   JOB_HISTORY                                   0,1                8 TABLE
+HR                   JOBS                                          0,1                8 TABLE
+HR                   LOCATIONS                                     0,1                8 TABLE
+HR                   REGIONS                                       0,1                8 TABLE
+=======
 
 List views 
 ```

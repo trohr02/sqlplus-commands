@@ -10,6 +10,7 @@ SET PAGESIZE 50000
 SET LINESIZE 500
 SET LONG 50000
 SET TRIMSPOOL ON
+SET TIMING OFF
 SET VERIFY OFF
 SET TAB OFF
 SET ECHO OFF
@@ -41,7 +42,7 @@ END;
 BEGIN
     SELECT SERIAL#
       INTO :serial#
-      FROM GV$SESSION
+      FROM V$SESSION
       WHERE AUDSID = SYS_CONTEXT('USERENV','SESSIONID');
 
     SELECT 
@@ -50,10 +51,10 @@ BEGIN
         LOWER(TH.INSTANCE) ||
          '_ora_' || LTRIM(TO_CHAR(P.SPID,'FM99999')) || '.trc' AS FILENAME
       INTO   :tracefile
-      FROM GV$PROCESS P,
-           GV$SESSION S,
-           GV$PARAMETER PAR,
-           GV$THREAD TH
+      FROM V$PROCESS P,
+           V$SESSION S,
+           V$PARAMETER PAR,
+           V$THREAD TH
       WHERE  S.AUDSID = SYS_CONTEXT('USERENV','SESSIONID')
 	    AND P.ADDR = S.PADDR
         AND PAR.NAME = 'user_dump_dest';
@@ -80,7 +81,7 @@ SELECT
   :audsid AS AUDSID
 FROM DUAL;
 
-EXEC IF :tracefile IS NULL THEN DBMS_OUTPUT.PUT_LINE('We don''t have select previlege on GV$ tables.'); END IF
+EXEC IF :tracefile IS NULL THEN DBMS_OUTPUT.PUT_LINE('We don''t have select previlege on V$ tables.'); END IF
 EXEC IF :tracefile IS NOT NULL THEN DBMS_OUTPUT.PUT_LINE('Session trace file: ' || :tracefile); END IF
 
 /* other sesssion settings */
